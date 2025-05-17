@@ -1,0 +1,9 @@
+adafruit-circuitpython-busdevice
+adafruit-circuitpython-pureio
+adafruit-platformdetect
+adafruit-circuitpython-mpu9250
+flask
+pandas
+matplotlib
+gpiozero
+periphery
