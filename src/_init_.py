@@ -2,7 +2,7 @@ import sys, os
 sys.path.append(os.path.join(os.path.dirname(_file_), "src"))
 
 import board, busio, threading
-from motor import MotorController
+from motor_controller import MotorController
 from imu import IMUReader
 from gimbal_test import test_vertical_setup, test_horizontal_setup
 from evaluate import log_result, plot_results

@@ -4,7 +4,7 @@ import time
 
 GPIO_CHIP = "/dev/gpiochip0"
 class MotorController:
-    def _init_(self, step_pin, dir_pin, enable_pin=None):
+    def __init__(self, step_pin, dir_pin, enable_pin=None):
         self.step   = GPIO(GPIO_CHIP, step_pin,   "out")
         self.dir    = GPIO(GPIO_CHIP, dir_pin,    "out")
         self.enable = GPIO(GPIO_CHIP, enable_pin, "out") if enable_pin else None
