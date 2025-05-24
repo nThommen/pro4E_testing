@@ -1,10 +1,13 @@
 # src/imu.py
 import board, busio, time, math
 from adafruit_mpu9250 import MPU9250
+import imufusion
+import numpy as np
 
 class IMUReader:
-    def _init_(self, i2c_bus, address=0x68):
+    def __init__(self, i2c_bus, address=0x68):
         self.imu = MPU9250(i2c_bus, address=address)
+        self.ahrs = imufusion.Ahrs()
         time.sleep(0.5)
 
     def get_euler(self):
