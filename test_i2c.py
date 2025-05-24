@@ -5,3 +5,5 @@ i2c = busio.I2C(board.SCL, board.SDA)
 while not i2c.try_lock(): pass
 print("✅ I2C-Bus OK:", i2c)
 i2c.unlock()
+
+#Hello from Laptop

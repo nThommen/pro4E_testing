@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./robohat_mpu9250"
+    ]
+}

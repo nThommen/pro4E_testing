@@ -1,5 +1,5 @@
 import sys, os
-sys.path.append(os.path.join(os.path.dirname(_file_), "src"))
+sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 import board, busio, threading
 from motor_controller import MotorController
@@ -26,7 +26,7 @@ def run_tests():
     plot_results()
     i2c.unlock()
 
-if _name_ == "_main_":
+if __name__ == "_main_":
     app = create_app()
     threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000),
                      daemon=True).start()
