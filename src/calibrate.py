@@ -1,6 +1,6 @@
 # src/calibrate.py
 import board, busio, yaml, time
-from motor_controller import MotorController
+from motor import MotorController
 from imu import IMUReader
 
 def auto_calibrate(cfg="config.yaml"):

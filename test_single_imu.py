@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import sys, os, time
 sys.path.insert(0, os.path.abspath("src"))
-from imu import IMUReader
+from adafruit_mpu9250 import MPU9250
+
 import board, busio
 
 print("🚀 Einzel-IMU-Test @0x68 …")

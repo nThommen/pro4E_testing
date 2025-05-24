@@ -1,4 +1,4 @@
-# src/motor.py
+# src/motor_controller.py
 from periphery import GPIO
 import time
 
