@@ -14,8 +14,6 @@ while not i2c.try_lock(): pass
 
 imu = IMUReader(i2c, address=0x68)
 
-
-
 for i in range(5):
     
     quaternion = imu.get_quaternion()

@@ -1,12 +1,12 @@
 # src/imu.py
 import board, busio, time, math
-from mpu9250 import MPU9250
+import adafruit_bno055
 import imufusion
 import numpy as np
 
 class IMUReader:
     def __init__(self, i2c_bus, address, sample_rate=100):
-        self.imu = MPU9250(i2c_bus, address=address)
+        self.imu = adafruit_bno055(i2c_bus, address=address)
         self.ahrs = imufusion.Ahrs()
         self.sample_rate = sample_rate  # Hz
         time.sleep(0.5)
@@ -32,3 +32,4 @@ class IMUReader:
         # Returns quaternion as (w, x, y, z)
         q = self.ahrs.quaternion
         return (q.w, q.x, q.y, q.z)
+        
