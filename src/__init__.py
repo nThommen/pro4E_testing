@@ -3,7 +3,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "src"))
 
 import board, busio, threading
 from motor_controller import MotorController
-from imu import IMUReader
+from imu import IMU
 from gimbal_test import test_vertical_setup, test_horizontal_setup
 from evaluate import log_result, plot_results
 from dashboard import create_app
@@ -13,8 +13,8 @@ def run_tests():
     i2c = busio.I2C(board.SCL, board.SDA)
     while not i2c.try_lock(): pass
 
-    imu_base   = IMUReader(i2c, address=0x68)
-    imu_gimbal = IMUReader(i2c, address=0x69)
+    imu_base   = IMU(i2c, address=0x68)
+    imu_gimbal = IMU(i2c, address=0x69)
     motor = MotorController(step_pin=20, dir_pin=21, enable_pin=16)
 
     diff_v = test_vertical_setup(motor, imu_base, imu_gimbal)

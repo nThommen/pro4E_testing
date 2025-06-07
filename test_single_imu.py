@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys, os, time
 
-from src.imu import IMUReader
+from src.imu import IMU
 sys.path.insert(0, os.path.abspath("src"))
 #not clear if this is needed, but it was in the original code
 #from adafruit_mpu9250 import MPU9250
@@ -12,7 +12,7 @@ print("🚀 Einzel-IMU-Test @0x68 …")
 i2c = busio.I2C(board.SCL, board.SDA)
 while not i2c.try_lock(): pass
 
-imu = IMUReader(i2c, address=0x68)
+imu = IMU(i2c, address=0x68)
 
 for i in range(5):
     

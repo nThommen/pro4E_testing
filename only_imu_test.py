@@ -1,19 +1,11 @@
-#!/usr/bin/env python3
 import sys, os
-import threading
 sys.path.insert(0, os.path.abspath("src"))
-from motor_controller import MotorController
-from imu import IMU
-from scipy.spatial.transform import Rotation as R
 import board
-import matplotlib.pyplot as plt
 import numpy as np
-from gpiozero import OutputDevice
+from imu import IMU
+import matplotlib.pyplot as plt
+from scipy.spatial.transform import Rotation as R
 from time import sleep
-
-motor = MotorController(step_pin=20, dir_pin=21, enable_pin=None)
-num_steps = 6400  # Adjust as needed for your motor
-delay = 0.0005  # Adjust as needed for your motor speed
 
 sensor_gimbal = IMU(
     i2c_bus=board.I2C(),
@@ -33,30 +25,16 @@ sensor_tisch = IMU(
 # Wait for the sensors to initialize
 sleep(1)
 
-
 def to_scipy_quat(q):
     # Convert (w, x, y, z) → (x, y, z, w)
     return [q[1], q[2], q[3], q[0]]
-
-def motor_task():
-    while True:
-        motor.rotate(num_steps, False, delay)
-        sleep(1)
-        motor.rotate(num_steps, True, delay)
-        sleep(1)
-
-# Start the motor control in a separate thread
-motor_thread = threading.Thread(target=motor_task, daemon=True)
-motor_thread.start()
 
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 plt.ion()
 plt.show()
 
-
-
-while motor_thread.is_alive():
+while True:
     q_tisch = sensor_tisch.imu.quaternion
     q_gimbal = sensor_gimbal.imu.quaternion
         
@@ -87,14 +65,3 @@ while motor_thread.is_alive():
         
     plt.draw()
     plt.pause(0.1)
-
-
-"""print("▶ Richtung rückwärts (HIGH)")
-motor.rotate(num_steps, True, delay)
-sleep(1)
-
-print("▶ Richtung vorwärts (LOW)")
-motor.rotate(num_steps, False, delay)
-sleep(1)
-
-print("✅ Motor-Test abgeschlossen")"""

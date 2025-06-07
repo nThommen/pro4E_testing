@@ -10,7 +10,7 @@ class MotorController:
         self.enable = GPIO(GPIO_CHIP, enable_pin, "out") if enable_pin else None
         if self.enable: self.enable.write(False)
 
-    def rotate(self, steps, direction, delay=0.002):
+    def rotate(self, steps, direction, delay):
         self.dir.write(direction)
         for _ in range(steps):
             self.step.write(True); time.sleep(delay)

@@ -1,14 +1,14 @@
 # src/calibrate.py
 import board, busio, yaml, time
 from motor_controller import MotorController
-from imu import IMUReader
+from imu import IMU
 
 def auto_calibrate(cfg="config.yaml"):
     c=yaml.safe_load(open(cfg))
     bus=busio.I2C(board.SCL,board.SDA)
     while not bus.try_lock(): pass
-    imu0=IMUReader(bus, c["imu"]["base_addr"])
-    imu1=IMUReader(bus, c["imu"]["gimbal_addr"])
+    imu0=IMU(bus, c["imu"]["base_addr"])
+    imu1=IMU(bus, c["imu"]["gimbal_addr"])
     motor=MotorController(**c["motor"])
     offs=[]
     for angle in c["calibration"]["test_angles"]:
